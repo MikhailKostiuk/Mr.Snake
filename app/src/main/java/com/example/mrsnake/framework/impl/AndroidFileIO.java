@@ -20,13 +20,15 @@ public class AndroidFileIO implements FileIO {
 
     Context mContext;
     AssetManager mAssetManager;
-    String externalStoragePath;
+    String mExternalStoragePath;
+    File mExternalFilesDir;
 
     public AndroidFileIO(Context context) {
         this.mContext = context;
         this.mAssetManager = context.getAssets();
-        this.externalStoragePath = Environment.getExternalStorageDirectory()
+        this.mExternalStoragePath = Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + File.separator;
+        this.mExternalFilesDir = context.getExternalFilesDir(null);
     }
 
     @Override
@@ -36,12 +38,12 @@ public class AndroidFileIO implements FileIO {
 
     @Override
     public InputStream readFile(String fileName) throws IOException {
-        return new FileInputStream(externalStoragePath + fileName);
+        return new FileInputStream(new File(mExternalFilesDir, fileName));
     }
 
     @Override
     public OutputStream writeFile(String fileName) throws IOException {
-        return new FileOutputStream(externalStoragePath + fileName);
+        return new FileOutputStream(new File(mExternalFilesDir, fileName));
     }
 
     public SharedPreferences getSharedPreferences() {
