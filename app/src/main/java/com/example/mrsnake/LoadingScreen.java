@@ -34,7 +34,7 @@ public class LoadingScreen extends Screen {
         Assets.headRight = graphics.newPixmap("headright.png", PixmapFormat.ARGB4444);
         Assets.tail = graphics.newPixmap("tail.png", PixmapFormat.ARGB4444);
         Assets.apple = graphics.newPixmap("stain1.png", PixmapFormat.ARGB4444);
-        Assets.pineapple = graphics.newPixmap("stain2.png", PixmapFormat.ARGB4444);
+        Assets.mango = graphics.newPixmap("stain2.png", PixmapFormat.ARGB4444);
         Assets.grapes = graphics.newPixmap("stain3.png", PixmapFormat.ARGB4444);
 
         Assets.click = mGame.getAudio().newSound("click.ogg");
