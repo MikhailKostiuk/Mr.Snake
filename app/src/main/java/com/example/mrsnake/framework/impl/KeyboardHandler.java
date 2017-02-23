@@ -14,7 +14,7 @@ public class KeyboardHandler implements View.OnKeyListener {
 
     boolean[] mPressedKeys = new boolean[128];
     Pool<Input.KeyEvent> mKeyEventPool;
-    List<Input.KeyEvent> mKeyEventsBuffer;
+    List<Input.KeyEvent> mKeyEventsBuffer = new ArrayList<>();
     List<Input.KeyEvent> mKeyEvents = new ArrayList<>();
 
     public KeyboardHandler(View view) {

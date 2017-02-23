@@ -107,7 +107,7 @@ public class GameScreen extends Screen {
             Input.TouchEvent touchEvent = touchEvents.get(i);
 
             if (touchEvent.type == Input.TouchEvent.TOUCH_UP) {
-                if (touchEvent.y < 1620) {
+                if (touchEvent.x > 0 && touchEvent.y < 1620) {
                     if (Settings.sSoundEnabled) {
                         Assets.click.play(1);
                     }
@@ -210,7 +210,7 @@ public class GameScreen extends Screen {
         graphics.drawPixmap(fruitPixmap, x, y);
 
         int snakeLength = snake.snakeParts.size();
-        for (int i = 0; i < snakeLength; i++) {
+        for (int i = 1; i < snakeLength; i++) {
             SnakePart snakePart = snake.snakeParts.get(i);
             x = snakePart.x * 54;
             y = snakePart.y * 54;
@@ -235,7 +235,7 @@ public class GameScreen extends Screen {
     private void drawReadyUI() {
         Graphics graphics = mGame.getGraphics();
 
-        graphics.drawPixmap(Assets.ready, 235, 760);
+        graphics.drawPixmap(Assets.ready, 101, 760);
         graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
     }
 
@@ -250,7 +250,7 @@ public class GameScreen extends Screen {
     private void drawPausedUI() {
         Graphics graphics = mGame.getGraphics();
 
-        graphics.drawPixmap(Assets.pause, 205, 760);
+        graphics.drawPixmap(Assets.pause, 23, 760);
         graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
     }
 

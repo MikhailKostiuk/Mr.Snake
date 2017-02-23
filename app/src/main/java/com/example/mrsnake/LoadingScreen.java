@@ -21,9 +21,9 @@ public class LoadingScreen extends Screen {
         Assets.logo = graphics.newPixmap("logo.png", PixmapFormat.ARGB4444);
         Assets.mainMenu = graphics.newPixmap("mainmenu.png", PixmapFormat.ARGB4444);
         Assets.buttons = graphics.newPixmap("buttons.png", PixmapFormat.ARGB4444);
-        Assets.help1 = graphics.newPixmap("help1.png", PixmapFormat.ARGB4444);
-        Assets.help2 = graphics.newPixmap("help2.png", PixmapFormat.ARGB4444);
-        Assets.help3 = graphics.newPixmap("help3.png", PixmapFormat.ARGB4444);
+//        Assets.help1 = graphics.newPixmap("help1.png", PixmapFormat.ARGB4444);
+//        Assets.help2 = graphics.newPixmap("help2.png", PixmapFormat.ARGB4444);
+//        Assets.help3 = graphics.newPixmap("help3.png", PixmapFormat.ARGB4444);
         Assets.numbers = graphics.newPixmap("numbers.png", PixmapFormat.ARGB4444);
         Assets.ready = graphics.newPixmap("ready.png", PixmapFormat.ARGB4444);
         Assets.pause = graphics.newPixmap("pausemenu.png", PixmapFormat.ARGB4444);
@@ -33,9 +33,9 @@ public class LoadingScreen extends Screen {
         Assets.headDown = graphics.newPixmap("headdown.png", PixmapFormat.ARGB4444);
         Assets.headRight = graphics.newPixmap("headright.png", PixmapFormat.ARGB4444);
         Assets.tail = graphics.newPixmap("tail.png", PixmapFormat.ARGB4444);
-        Assets.apple = graphics.newPixmap("stain1.png", PixmapFormat.ARGB4444);
-        Assets.mango = graphics.newPixmap("stain2.png", PixmapFormat.ARGB4444);
-        Assets.grapes = graphics.newPixmap("stain3.png", PixmapFormat.ARGB4444);
+        Assets.apple = graphics.newPixmap("apple.png", PixmapFormat.ARGB4444);
+        Assets.mango = graphics.newPixmap("mango.png", PixmapFormat.ARGB4444);
+        Assets.grapes = graphics.newPixmap("grapes.png", PixmapFormat.ARGB4444);
 
         Assets.click = mGame.getAudio().newSound("click.ogg");
         Assets.eat = mGame.getAudio().newSound("eat.ogg");
