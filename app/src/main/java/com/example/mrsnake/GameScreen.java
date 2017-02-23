@@ -1,7 +1,11 @@
 package com.example.mrsnake;
 
+import android.graphics.Color;
+
 import com.example.mrsnake.framework.Game;
+import com.example.mrsnake.framework.Graphics;
 import com.example.mrsnake.framework.Input;
+import com.example.mrsnake.framework.Pixmap;
 import com.example.mrsnake.framework.Screen;
 
 import java.util.List;
@@ -48,12 +52,36 @@ public class GameScreen extends Screen {
 
     @Override
     public void present(float deltaTime) {
+        Graphics graphics = mGame.getGraphics();
 
+        graphics.drawPixmap(Assets.background, 0, 0);
+        drawWorld(mWorld);
+
+        if (mGameState == GameState.Ready) {
+            drawReadyUI();
+        }
+        if (mGameState == GameState.Running) {
+            drawRunningUI();
+        }
+        if (mGameState == GameState.Paused) {
+            drawPausedUI();
+        }
+        if (mGameState == GameState.GameOver) {
+            drawGameOverUI();
+        }
+
+        drawText(graphics, mScore, graphics.getWidth() / 2 - mScore.length() * 140 / 2, 1663);
     }
 
     @Override
     public void pause() {
-
+        if (mGameState == GameState.Running) {
+            mGameState = GameState.Paused;
+        }
+        if (mWorld.gameOver) {
+            Settings.addScore(mWorld.score);
+            Settings.save(mGame.getFileIO());
+        }
     }
 
     @Override
@@ -126,7 +154,7 @@ public class GameScreen extends Screen {
                     if (Settings.sSoundEnabled) {
                         Assets.click.play(1);
                     }
-                    mGameState = GameState.Running
+                    mGameState = GameState.Running;
                 }
 
                 // "QUIT"
@@ -156,6 +184,106 @@ public class GameScreen extends Screen {
                     return;
                 }
             }
+        }
+    }
+
+    private void drawWorld(World world) {
+        Graphics graphics = mGame.getGraphics();
+        Snake snake = world.snake;
+        SnakePart head = snake.snakeParts.get(0);
+        Fruit fruit = world.fruit;
+
+        Pixmap fruitPixmap = null;
+        switch (fruit.type) {
+            case Fruit.APPLE:
+                fruitPixmap = Assets.apple;
+                break;
+            case Fruit.MANGO:
+                fruitPixmap = Assets.mango;
+                break;
+            case Fruit.GRAPES:
+                fruitPixmap = Assets.grapes;
+                break;
+        }
+        int x = fruit.x * 54;
+        int y = fruit.y * 54;
+        graphics.drawPixmap(fruitPixmap, x, y);
+
+        int snakeLength = snake.snakeParts.size();
+        for (int i = 0; i < snakeLength; i++) {
+            SnakePart snakePart = snake.snakeParts.get(i);
+            x = snakePart.x * 54;
+            y = snakePart.y * 54;
+            graphics.drawPixmap(Assets.tail, x, y);
+        }
+
+        Pixmap headPixmap = null;
+        if(snake.direction == Snake.UP)
+            headPixmap = Assets.headUp;
+        if(snake.direction == Snake.LEFT)
+            headPixmap = Assets.headLeft;
+        if(snake.direction == Snake.DOWN)
+            headPixmap = Assets.headDown;
+        if(snake.direction == Snake.RIGHT)
+            headPixmap = Assets.headRight;
+        x = head.x * 54 + 26;
+        y = head.y * 54 + 26;
+        graphics.drawPixmap(
+                headPixmap, x - headPixmap.getWidth() / 2, y - headPixmap.getHeight() / 2);
+    }
+
+    private void drawReadyUI() {
+        Graphics graphics = mGame.getGraphics();
+
+        graphics.drawPixmap(Assets.ready, 235, 760);
+        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+    }
+
+    private void drawRunningUI() {
+        Graphics graphics = mGame.getGraphics();
+
+        graphics.drawPixmap(Assets.buttons, 0, 1620, 300, 300, 300, 300);
+        graphics.drawPixmap(Assets.buttons, 780, 1620, 0, 300, 300, 300);
+        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+    }
+
+    private void drawPausedUI() {
+        Graphics graphics = mGame.getGraphics();
+
+        graphics.drawPixmap(Assets.pause, 205, 760);
+        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+    }
+
+    private void drawGameOverUI() {
+        Graphics graphics = mGame.getGraphics();
+
+        graphics.drawPixmap(Assets.gameOver, 49, 760);
+        graphics.drawPixmap(Assets.buttons, 780, 1620, 0, 600, 300, 300);
+        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+    }
+
+    private void drawText(Graphics graphics, String line, int x, int y) {
+        int length = line.length();
+        for (int i = 0; i < length  ; i++) {
+            char character = line.charAt(i);
+
+            if (character == ' ') {
+                x += 130;
+                continue;
+            }
+
+            int srcX = 0;
+            int srcWidth = 0;
+            if (character == '.') {
+                srcX = 1400;
+                srcWidth = 65;
+            } else {
+                srcX = (character - '0') * 140; // 140 is single number width
+                srcWidth = 140;
+            }
+
+            graphics.drawPixmap(Assets.numbers, x, y, srcX, 0, srcWidth, 213);
+            x += srcWidth;
         }
     }
 }

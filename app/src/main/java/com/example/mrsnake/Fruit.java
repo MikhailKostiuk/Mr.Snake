@@ -4,7 +4,7 @@ package com.example.mrsnake;
 public class Fruit {
 
     public static final int APPLE = 0;
-    public static final int PINEAPPLE = 1;
+    public static final int MANGO = 1;
     public static final int GRAPES = 2;
 
     public int x, y;
