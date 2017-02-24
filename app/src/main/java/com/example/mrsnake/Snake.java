@@ -16,9 +16,8 @@ public class Snake {
 
     public Snake() {
         direction = UP;
-        snakeParts.add(new SnakePart(10, 14));
-        snakeParts.add(new SnakePart(10, 15));
-        snakeParts.add(new SnakePart(10, 16));
+        snakeParts.add(new SnakePart(6, 8));
+        snakeParts.add(new SnakePart(6, 9));
     }
 
     public void turnLeft() {
@@ -65,15 +64,15 @@ public class Snake {
         }
 
         if (head.x < 0) {
-            head.x = 19;
+            head.x = 11;
         }
-        if (head.x > 19) {
+        if (head.x > 11) {
             head.x = 0;
         }
         if (head.y < 0) {
-            head.y = 29;
+            head.y = 17;
         }
-        if (head.y > 29) {
+        if (head.y > 17) {
             head.y = 0;
         }
     }

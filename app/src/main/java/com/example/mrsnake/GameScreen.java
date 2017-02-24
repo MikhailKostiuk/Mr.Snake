@@ -205,31 +205,43 @@ public class GameScreen extends Screen {
                 fruitPixmap = Assets.grapes;
                 break;
         }
-        int x = fruit.x * 54;
-        int y = fruit.y * 54;
+        int x = fruit.x * 90;
+        int y = fruit.y * 90;
         graphics.drawPixmap(fruitPixmap, x, y);
 
         int snakeLength = snake.snakeParts.size();
         for (int i = 1; i < snakeLength; i++) {
             SnakePart snakePart = snake.snakeParts.get(i);
-            x = snakePart.x * 54;
-            y = snakePart.y * 54;
+            x = snakePart.x * 90;
+            y = snakePart.y * 90;
             graphics.drawPixmap(Assets.tail, x, y);
         }
 
         Pixmap headPixmap = null;
-        if(snake.direction == Snake.UP)
+
+        if(snake.direction == Snake.UP) {
             headPixmap = Assets.headUp;
-        if(snake.direction == Snake.LEFT)
+            x = head.x * 90 - 1;
+            y = head.y * 90 - 22;
+        }
+        if(snake.direction == Snake.LEFT) {
             headPixmap = Assets.headLeft;
-        if(snake.direction == Snake.DOWN)
+            x = head.x * 90 - 22;
+            y = head.y * 90 - 24;
+        }
+        if(snake.direction == Snake.DOWN) {
             headPixmap = Assets.headDown;
-        if(snake.direction == Snake.RIGHT)
+            x = head.x * 90 - 23;
+            y = head.y * 90 - 2;
+        }
+        if(snake.direction == Snake.RIGHT) {
             headPixmap = Assets.headRight;
-        x = head.x * 54 + 26;
-        y = head.y * 54 + 26;
+            x = head.x * 90 - 2;
+            y = head.y * 90 - 24;
+        }
+
         graphics.drawPixmap(
-                headPixmap, x - headPixmap.getWidth() / 2, y - headPixmap.getHeight() / 2);
+                headPixmap, x, y);
     }
 
     private void drawReadyUI() {
