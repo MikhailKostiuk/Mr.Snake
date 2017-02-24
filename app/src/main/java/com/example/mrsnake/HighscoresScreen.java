@@ -51,7 +51,7 @@ public class HighscoresScreen extends Screen {
         int y = 400;
         for (int i = 0; i < 5; i++) {
             drawText(graphics, mLines[i], 260, y);
-            y += 50;
+            y += 233;
         }
 
         graphics.drawPixmap(Assets.buttons, 0, 1620, 300, 300, 300, 300);
@@ -78,15 +78,15 @@ public class HighscoresScreen extends Screen {
             char character = line.charAt(i);
 
             if (character == ' ') {
-                x += 130;
+                x += 70;
                 continue;
             }
 
             int srcX = 0;
             int srcWidth = 0;
             if (character == '.') {
-                srcX = 1400;
-                srcWidth = 65;
+                srcX = 1415;
+                srcWidth = 50;
             } else {
                 srcX = (character - '0') * 140; // 140 is single number width
                 srcWidth = 140;

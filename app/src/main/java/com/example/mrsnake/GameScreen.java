@@ -153,6 +153,8 @@ public class GameScreen extends Screen {
                         Assets.click.play(1);
                     }
                     mGame.setScreen(new MainMenuScreen(mGame));
+                    Settings.addScore(mWorld.score);
+                    Settings.save(mGame.getFileIO());
                     return;
                 }
             }

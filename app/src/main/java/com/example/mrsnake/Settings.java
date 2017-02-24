@@ -17,7 +17,7 @@ public class Settings {
     public static void load(FileIO files) {
         BufferedReader in = null;
         try {
-            in = new BufferedReader(new InputStreamReader(files.readFile(".mrsnake")));
+            in = new BufferedReader(new InputStreamReader(files.readFile(".mrsnake.txt")));
             sSoundEnabled = Boolean.parseBoolean(in.readLine());
             for (int i = 0; i < 5; i++) {
                 sHighscores[i] = Integer.parseInt(in.readLine());
@@ -38,10 +38,10 @@ public class Settings {
     public static void save(FileIO files) {
         BufferedWriter out = null;
         try {
-            out = new BufferedWriter(new OutputStreamWriter(files.writeFile(".mrsnake")));
-            out.write(Boolean.toString(sSoundEnabled));
+            out = new BufferedWriter(new OutputStreamWriter(files.writeFile(".mrsnake.txt")));
+            out.write("" + Boolean.toString(sSoundEnabled) + "\n");
             for (int i = 0; i < 5; i++) {
-                out.write(Integer.toString(sHighscores[i]));
+                out.write(Integer.toString(sHighscores[i]) + "\n");
             }
         } catch (IOException e) {
 
