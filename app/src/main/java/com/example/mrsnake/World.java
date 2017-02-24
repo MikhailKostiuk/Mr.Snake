@@ -9,7 +9,7 @@ public class World {
     final static int WORLD_HEIGHT = 18;
     final static int SCORE_INCREMENT = 10;
     final static float TICK_INITIAL = 0.5f;
-    final static float TICK_DECREMENT = 0.025f;
+    final static float TICK_DECREMENT = 0.0155f;
 
     public Snake snake;
     public Fruit fruit;

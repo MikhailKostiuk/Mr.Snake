@@ -20,7 +20,7 @@ public class GameScreen extends Screen {
         GameOver
     }
 
-    GameState mGameState = GameState.Ready;
+    GameState mGameState = GameState.Paused;
     World mWorld;
     int mOldScore = 0;
     String mScore = "0";
@@ -36,9 +36,6 @@ public class GameScreen extends Screen {
         List<Input.TouchEvent> touchEvents = mGame.getInput().getTouchEvents();
         mGame.getInput().getKeyEvents();
 
-        if (mGameState == GameState.Ready) {
-            updateReady(touchEvents);
-        }
         if (mGameState == GameState.Running) {
             updateRunning(touchEvents, deltaTime);
         }
@@ -57,9 +54,6 @@ public class GameScreen extends Screen {
         graphics.drawPixmap(Assets.background, 0, 0);
         drawWorld(mWorld);
 
-        if (mGameState == GameState.Ready) {
-            drawReadyUI();
-        }
         if (mGameState == GameState.Running) {
             drawRunningUI();
         }
@@ -94,20 +88,15 @@ public class GameScreen extends Screen {
 
     }
 
-    private void updateReady(List<Input.TouchEvent> touchEvents) {
-        if (touchEvents.size() > 0) {
-            mGameState = GameState.Running;
-        }
-    }
-
     private void updateRunning(List<Input.TouchEvent> touchEvents, float deltaTime) {
         int length = touchEvents.size();
 
         for (int i = 0; i < length; i++) {
             Input.TouchEvent touchEvent = touchEvents.get(i);
 
-            if (touchEvent.type == Input.TouchEvent.TOUCH_UP) {
-                if (touchEvent.x > 0 && touchEvent.y < 1620) {
+            if (touchEvent.type == Input.TouchEvent.TOUCH_DOWN) {
+                if (touchEvent.x > 40 && touchEvent.x < 200 &&
+                        touchEvent.y > 40 && touchEvent.y < 220) {
                     if (Settings.sSoundEnabled) {
                         Assets.click.play(1);
                     }
@@ -177,7 +166,8 @@ public class GameScreen extends Screen {
             Input.TouchEvent touchEvent = touchEvents.get(i);
             if(touchEvent.type == Input.TouchEvent.TOUCH_UP) {
 
-                if(touchEvent.x >= 780 && touchEvent.y >= 1620) {
+                if(touchEvent.x >= 390 && touchEvent.x < 690 &&
+                        touchEvent.y >= 1025 && touchEvent.y < 1325) {
                     if(Settings.sSoundEnabled)
                         Assets.click.play(1);
                     mGame.setScreen(new MainMenuScreen(mGame));
@@ -244,34 +234,28 @@ public class GameScreen extends Screen {
                 headPixmap, x, y);
     }
 
-    private void drawReadyUI() {
-        Graphics graphics = mGame.getGraphics();
-
-        graphics.drawPixmap(Assets.ready, 101, 760);
-        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
-    }
-
     private void drawRunningUI() {
         Graphics graphics = mGame.getGraphics();
 
+        graphics.drawPixmap(Assets.buttons, 40, 40, 370, 660, 160, 180);
         graphics.drawPixmap(Assets.buttons, 0, 1620, 300, 300, 300, 300);
         graphics.drawPixmap(Assets.buttons, 780, 1620, 0, 300, 300, 300);
-        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+        graphics.drawRect(0, 1619, 1080, 5, Color.BLACK);
     }
 
     private void drawPausedUI() {
         Graphics graphics = mGame.getGraphics();
 
-        graphics.drawPixmap(Assets.pause, 23, 760);
-        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+        graphics.drawPixmap(Assets.pause, 206, 760);
+        graphics.drawRect(0, 1619, 1080, 5, Color.BLACK);
     }
 
     private void drawGameOverUI() {
         Graphics graphics = mGame.getGraphics();
 
         graphics.drawPixmap(Assets.gameOver, 49, 760);
-        graphics.drawPixmap(Assets.buttons, 780, 1620, 0, 600, 300, 300);
-        graphics.drawLine(0, 1620, 1080, 1620, Color.BLACK);
+        graphics.drawPixmap(Assets.buttons, 390, 1025, 0, 600, 300, 300);
+        graphics.drawRect(0, 1619, 1080, 5, Color.BLACK);
     }
 
     private void drawText(Graphics graphics, String line, int x, int y) {

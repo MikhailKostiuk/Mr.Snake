@@ -14,7 +14,6 @@ public class Assets {
     public static Pixmap help2;
     public static Pixmap help3;
     public static Pixmap numbers;
-    public static Pixmap ready;
     public static Pixmap pause;
     public static Pixmap gameOver;
     public static Pixmap headUp;
