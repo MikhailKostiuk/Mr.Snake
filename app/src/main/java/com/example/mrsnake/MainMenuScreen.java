@@ -49,7 +49,7 @@ public class MainMenuScreen extends Screen {
                     return;
                 }
 
-                if (inBounds(touchEvent, 340, 1039, 400, 200)) {
+                if (inBounds(touchEvent, 340, 1239, 400, 200)) {
                     mGame.setScreen(new HelpScreen(mGame));
                     if (Settings.sSoundEnabled) {
                         Assets.click.play(1);

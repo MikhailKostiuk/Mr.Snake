@@ -30,6 +30,13 @@ public class HelpScreen3 extends Screen {
                     }
                     return;
                 }
+                if (touchEvent.x < 300 && touchEvent.y > 1620) {
+                    mGame.setScreen(new HelpScreen2(mGame));
+                    if (Settings.sSoundEnabled) {
+                        Assets.click.play(1);
+                    }
+                    return;
+                }
             }
         }
     }
@@ -37,9 +44,9 @@ public class HelpScreen3 extends Screen {
     @Override
     public void present(float deltaTime) {
         Graphics graphics = mGame.getGraphics();
-        graphics.drawPixmap(Assets.background, 0, 0);
-//        graphics.drawPixmap(Assets.help3);
+        graphics.drawPixmap(Assets.help3, 0, 0);
         graphics.drawPixmap(Assets.buttons, 780, 1620, 0, 600, 300, 300);
+        graphics.drawPixmap(Assets.buttons, 0, 1620, 300, 300, 300, 300);
     }
 
     @Override
